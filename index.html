@@ -1,52 +1,8 @@
 <!doctype html>
 <html ng-app="ngApp">
 <head>
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.6/marked.min.js"></script>
-  <script src="https://rawgit.com/yaru22/angular-md/master/dist/angular-md.min.js"></script>
-  <script src="http://yandex.st/highlightjs/8.0/highlight.min.js"></script>
-
-  <script src="https://rawgit.com/Hypercubed/angular-marked/master/dist/angular-marked.min.js"></script>
-
-  <link rel="stylesheet" href="http://yandex.st/highlightjs/8.0/styles/default.min.css">
-  <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.4.2/pure-min.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/sass.js/0.10.4/sass.min.js"
-          integrity="sha256-rzDtCDsa7wPprx0sllIB8Hf1mPeuG1Qnq++xiQj0jjk=" crossorigin="anonymous"></script>
-  <link rel="stylesheet/less" type="text/css" href="styles.less"/>
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/less.js/2.7.2/less.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.4/lodash.min.js"
-          integrity="sha256-8E6QUcFg1KTnpEU8TFGhpTGHw5fJqB9vCms3OhAYLqw=" crossorigin="anonymous"></script>
-  <script>
-    var App = angular.module('ngApp', ['yaru22.md']);
-
-    App.controller('eggHuntCtrl', function ($scope, $http) {
-      $http.get('questions.json')
-        .then(function (res) {
-          $scope.eggs = res.data;
-        })
-        .then(function () {
-          _.forEach(JSON.parse(window.sessionStorage.getItem("responses")), function (value, key) {
-            if (value) {
-              $scope.eggs[key].response = value;
-            }
-          })
-        })
-      $scope.autosave = function () {
-        window.sessionStorage.setItem("responses", JSON.stringify(_.map($scope.eggs, "response")));
-      }
-      $scope.compare = function (expected, actual) {
-        var replace = /£|,|kg|/gi
-        try {
-          return expected.toLowerCase().replace(replace, "") == actual.toLowerCase().replace(replace, "");
-        }
-        catch (e) {
-          return false;
-        }
-      }
-    });
-
-  </script>
+  <title>Easter egg hunt</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
   <script
@@ -72,4 +28,43 @@
   </form>
 </div>
 </body>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.6/marked.min.js"></script>
+<script src="https://rawgit.com/yaru22/angular-md/master/dist/angular-md.min.js"></script>
+
+<link rel="stylesheet/less" type="text/css" href="styles.less"/>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/less.js/2.7.2/less.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.4/lodash.min.js"
+        integrity="sha256-8E6QUcFg1KTnpEU8TFGhpTGHw5fJqB9vCms3OhAYLqw=" crossorigin="anonymous"></script>
+<script>
+  var App = angular.module('ngApp', ['yaru22.md']);
+
+  App.controller('eggHuntCtrl', function ($scope, $http) {
+    $http.get('questions.json')
+      .then(function (res) {
+        $scope.eggs = res.data;
+      })
+      .then(function () {
+        _.forEach(JSON.parse(window.sessionStorage.getItem("responses")), function (value, key) {
+          if (value) {
+            $scope.eggs[key].response = value;
+          }
+        })
+      })
+    $scope.autosave = function () {
+      window.sessionStorage.setItem("responses", JSON.stringify(_.map($scope.eggs, "response")));
+    }
+    $scope.compare = function (expected, actual) {
+      var replace = /£|,|kg|/gi
+      try {
+        return expected.toLowerCase().replace(replace, "") == actual.toLowerCase().replace(replace, "");
+      }
+      catch (e) {
+        return false;
+      }
+    }
+  });
+
+</script>
 </html>

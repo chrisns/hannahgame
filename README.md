@@ -19,6 +19,7 @@ https://rawgit.com/chrisns/easter-egg-hunt/master/index.html
  - Print the [English reading booklet](https://www.sats-papers.co.uk/sats-papers/ks2/english/2016/ks2-english-2016-reading-booklet.pdf)
  - Fork this repo
  - Change the `clues` in the `questions.json` *(If you're not going to play this in my house)*
+ - Change the H1 in the index.html *(If your child isn't called Oliver)*
  - Change the questions and answers if you like, maybe you have more or less than 40 eggs, or maybe you want your child to focus on something else?
  - Go to:
 `https://rawgit.com/[ insert your GitHub username ]/easter-egg-hunt/master/index.html`
